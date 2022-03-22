@@ -37,27 +37,8 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="p-5">
-                                    <div class="text-center">
-
-                                        <h1 class="h4 text-gray-900 mb-4">Добро пожаловать!</h1>
-                                    </div>
-                                    <form class="user" method="post">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="inputEmail" aria-describedby="emailHelp"
-                                                placeholder="Введите почту...">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="inputPassword" placeholder="Пароль">
-                                        </div>
-                                        <input  class="btn btn-secondary btn-user btn-block" type="submit" value="Вход">
-
-                                        <hr>
-                                    </form>
-                                    <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
-                                    </div>
+                                    {% block content %}
+                                    {% endblock %}
                                 </div>
                             </div>
                         </div>
