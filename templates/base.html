@@ -53,8 +53,8 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="upload.html">Upload</a>
-                        <a class="collapse-item" href="download.html">Download</a>
+                        <a class="collapse-item" href="upload">Upload</a>
+                        <a class="collapse-item" href="download">Download</a>
                     </div>
                 </div>
             </li>
@@ -76,7 +76,7 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="search.html">Search</a>
+                        <a class="collapse-item" href="search">Search</a>
                     </div>
                 </div>
             </li>
@@ -90,8 +90,30 @@
             <div id="content">
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    {% block userInfo %}
-                    {% endblock %}
+
+                    <ul class="navbar-nav ml-auto">
+                        <div class="topbar-divider d-none  d-sm-block"></div>
+                        {% if not is_auth %}
+                            <a class="mr-2 d-none d-lg-inline text-primary small" href="{{ url_for('auth.register') }}">Register</a>
+                            <span class="mr-2 d-none d-lg-inline text-primary small"> or </span>
+                            <a class="mr-2 d-none d-lg-inline text-primary small" href="{{ url_for('auth.login') }}">Login</a>
+                        {% else %}
+                        <li class="nav-item dropdown no-arrow show">
+                            <a class="nav-link dropdown-toggle" role="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-primary small">{{ user.name }}</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="{{ url_for('auth.logout') }}">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400">
+                            </i>
+                                Logout
+                            </a>
+                            </div>
+                        </li>
+                        {% endif %}
+                        {% block userInfo %}
+                        {% endblock %}
+                    </ul>
                 </nav>
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->

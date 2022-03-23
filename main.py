@@ -1,5 +1,6 @@
 from flask import Blueprint
 from flask import flash, request, redirect, render_template
+from flask_login import login_required, current_user
 import back
 
 backend = back.back()
@@ -14,7 +15,11 @@ def page_not_found(e):
 
 @main.route('/')
 def index():
-    return render_template('index.html', len_minio=backend.minio.count_obj())
+    user = current_user
+    if not user.is_authenticated:
+        return render_template('index.html', len_minio=backend.minio.count_obj(), is_auth=False)
+    else:
+        return render_template('index.html', len_minio=backend.minio.count_obj(), is_auth=True, user=current_user)
 
 
 def allowed_file(filename):
@@ -57,6 +62,7 @@ def download():
 @main.route('/search')
 def search():
     return render_template('search.html')
+
 
 @main.route('/extend')
 def extend():
