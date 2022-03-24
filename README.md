@@ -1,5 +1,5 @@
-#Data Lake
-###Flask project with natasha, mongoDB and minio object storaje with S3
+# Data Lake
+### Flask project with natasha, mongoDB and minio object storaje with S3
 
 To run this app:
 1. Install requirements, like ```pip install -r requirements.txt```
