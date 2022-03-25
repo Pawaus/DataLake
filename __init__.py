@@ -1,13 +1,12 @@
 from flask import Flask, flash, request, redirect, url_for, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-db = SQLAlchemy()
 
+db = SQLAlchemy()
 
 from .auth import auth as auth_blueprint
 from .main import main as main_blueprint
 import back
-
 
 backend = back.back()
 
@@ -15,6 +14,8 @@ backend = back.back()
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'pawasecretkey'
+    app.config['FLASK_DEBUG'] = 0
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
     db.init_app(app)
     login_manager = LoginManager()
@@ -25,7 +26,7 @@ def create_app():
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
+
     app.register_blueprint(auth_blueprint)
     app.register_blueprint(main_blueprint)
-    app.run(host='192.168.101.128',port=5000)
     return app
