@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}
+Search
+{% endblock %}
+{% block content %}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Search</h1>
+</div>
+    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <div class="input-group">
+            <input type="text" class="form-control  bg-light border-0 small" placeholder="Search for...">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                    <i class="fas fa-search fa-sm">
+
+                    </i>
+                </button>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-lg-6 mb-5">
+            {% for item in result%}
+            <div class="card bg-light text-black shadow">
+                {{ item }}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
