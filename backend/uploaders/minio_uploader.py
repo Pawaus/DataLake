@@ -10,6 +10,9 @@ class minio_uploader():
     def __init__(self, ip, port, user, passwd, security):
         self.name_bucket = ""
         self.client = Minio(ip + ":" + port, user, passwd, session_token=None, secure=security)
+        self.s3 = boto3.resource('s3', endpoint_url='http://'+ip+':'+port, aws_access_key_id='3GYPMFGY6DLUVJF8DN5R',
+                            aws_secret_access_key='UN9GVBDJg6BhdmBxrYGgjfs+KsGGC++R1aHs3IgW')
+        self.bucket = self.s3.Bucket(str(self.name_bucket))
 
     def set_bucket(self, bucket):
         self.name_bucket = bucket
@@ -37,8 +40,14 @@ class minio_uploader():
         return obj
 
     def get_stream_file(self, filename):
-        s3 = boto3.resource('s3', endpoint_url='http://localhost:9000', aws_access_key_id='3GYPMFGY6DLUVJF8DN5R',
-                            aws_secret_access_key='UN9GVBDJg6BhdmBxrYGgjfs+KsGGC++R1aHs3IgW')
-        bucket = s3.Bucket(self.name_bucket)
-        file_s3 = bucket.Object(filename)
+        # TODO: create s3 object and move credentials to cfg file
+        file_s3 = self.bucket.Object(filename)
         return io.BytesIO(file_s3.get()["Body"].read())
+
+    def get_object(self):
+        # TODO:return list objects
+        list_obj = []
+        self.bucket = self.s3.Bucket(self.name_bucket)
+        for obj in self.bucket.objects.all():
+            list_obj.append(obj.key)
+        return list_obj
