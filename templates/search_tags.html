@@ -18,4 +18,13 @@ Search
             </div>
         </div>
     </form>
+    <div class="row">
+        <div class="col-lg-6 mb-5">
+            {% for item in result%}
+            <div class="card bg-light text-black shadow">
+                {{ item['file'] }}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

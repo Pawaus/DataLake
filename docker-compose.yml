@@ -1,15 +1,15 @@
-version: '3.7'
+version: '3'
 
 services:
   mongo:
-    image: mongo:latest
+    image: 'mongo:latest'
     container_name: mongo_db
     env_file:
       - deploy/.env.prod
     networks:
       - datalake_network
   minio:
-    image: minio:latest
+    image: 'bitnami/minio:latest'
     container_name: minio_db
     networks:
       - datalake_network

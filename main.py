@@ -62,13 +62,14 @@ def download():
 @main.route('/search_files')
 def search_files():
     result = backend.minio.get_object()
-    return render_template('search_files.html',result=result)
+    return render_template('search_files.html', result=result)
 
 
 @main.route('/search_tags')
 def search_tags():
-    backend.mongo.get_all_files()
-    return render_template('search_tags.html')
+    result = backend.mongo.get_all_files()
+    return render_template('search_tags.html', result=result)
+
 
 @main.route('/extend')
 def extend():
