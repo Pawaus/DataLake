@@ -20,6 +20,8 @@ services:
     image: datalake_pawa:0.0.1
     container_name: dl
     env_file:
+      - deploy/.env.prod
+    depends_on:
       - minio
       - mongo
     networks:
@@ -27,9 +29,9 @@ services:
   nginx:
     build: ./deploy/nginx
     image: nginx-datalake:0.0.1
-    container_name: naginx-datalake
+    container_name: nginx-datalake
     ports:
-      - "8080:80"
+      - "80:80"
     depends_on:
       - flask
     networks:

@@ -7,8 +7,8 @@ botocore>=1.24.24
 boto3>=1.21.24
 s3transfer>=0.5.2
 MarkupSafe>=2.0.1
-Werkzeug>=2.0.3
-dataclasses>=0.8
+Werkzeug~=2.0.0
+dataclasses>=0.6
 Jinja2>=3.0.3
 click>=8.0.4
 itsdangerous>=2.0.1
@@ -35,3 +35,9 @@ Flask>=2.0.3
 sortedcontainers>=2.4.0
 zipp>=3.6.0
 PyPDF2>=1.26.0
+flask_sqlalchemy
+flask_login
+python_docx
+PyPDF2
+
+

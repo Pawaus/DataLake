@@ -3,10 +3,11 @@ FROM snakepacker/python:all as builder
 RUN python3.8 -m venv /usr/share/python3/venv \
  && /usr/share/python3/venv/bin/pip install -U pip
 
-COPY . /mnt/
+COPY ./requirements.txt /mnt/requirements.txt
 RUN /usr/share/python3/venv/bin/pip install -r /mnt/requirements.txt
 
+COPY . /mnt/DataLake
 MAINTAINER pawa
-
-RUN source /usr/share/python3/venv/bin/activate
-RUN flask run
+COPY deploy/entrypoint /entrypoint
+RUN chmod +x /entrypoint
+ENTRYPOINT ["/entrypoint"]
