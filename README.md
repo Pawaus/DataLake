@@ -1,10 +1,11 @@
 # Data Lake
 ### Flask project with natasha, mongoDB and minio object storaje with S3
 
-To run this app:
-1. Install requirements, like ```pip install -r requirements.txt```
-2. Pull mongo and minio images from docker hub
-```docker pull minio/minio``` and ```docker pull mongo```
-3. Run with ```flask run```, specify with ```-h localhost```, where localhost is your ip-address and ```-p 5000``` like port for browse this app
+This project storage files and meta-information in different databases
 
-*Recommend to create virtual environment, ```python -m venv venv```*
+To run this app:
+1. Build docker-compose ```sudo docker-compose build```
+2. Run docker-compose images ```sudo docker-compose up```
+3. Try to open in browser localhost
+
+If you have any server on port 80, change in docker-compose.yml service nginx ports from ```80:80``` to ```8080:80```
