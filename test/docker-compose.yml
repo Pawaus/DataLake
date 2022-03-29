@@ -1,0 +1,26 @@
+version: '3'
+
+networks:
+  test_network:
+    driver: bridge
+
+services:
+  mongo:
+    image: mongo
+    container_name: mongo_db_test
+    ports:
+      - "27017:27017"
+    env_file:
+      - .env.test
+    networks:
+      - test_network
+  minio:
+    image: 'bitnami/minio:latest'
+    container_name: minio_db_test
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    networks:
+      - test_network
+    env_file:
+      - .env.test
