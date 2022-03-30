@@ -4,6 +4,7 @@ services:
   mongo:
     image: 'mongo:latest'
     container_name: mongo_db
+    hostname: mongo_db
     env_file:
       - deploy/.env.prod
     networks:
@@ -11,10 +12,11 @@ services:
   minio:
     image: 'bitnami/minio:latest'
     container_name: minio_db
-    networks:
-      - datalake_network
+    hostname: minio_db
     env_file:
       - deploy/.env.prod
+    networks:
+      - datalake_network
   flask:
     build: .
     image: datalake_pawa:0.0.1
