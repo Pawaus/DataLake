@@ -26,7 +26,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-
+@login_required
 @main.route('/upload', methods=['GET', 'POST'])
 def upload():
     if request.method == 'GET':

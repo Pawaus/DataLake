@@ -12,10 +12,11 @@ class minio_uploader():
         self.client = Minio(ip + ":" + port, user, passwd, session_token=None, secure=security)
         self.s3 = boto3.resource('s3', endpoint_url='http://'+ip+':'+port, aws_access_key_id='3GYPMFGY6DLUVJF8DN5R',
                             aws_secret_access_key='UN9GVBDJg6BhdmBxrYGgjfs+KsGGC++R1aHs3IgW')
-        self.bucket = self.s3.Bucket(str(self.name_bucket))
+
 
     def set_bucket(self, bucket):
         self.name_bucket = bucket
+        self.bucket = self.s3.Bucket(str(self.name_bucket))
         if not self.client.bucket_exists(self.name_bucket):
             self.client.make_bucket(self.name_bucket)
 
