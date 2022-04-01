@@ -5,14 +5,20 @@ services:
     image: 'mongo:latest'
     container_name: mongo_db
     hostname: mongo_db
+    ports:
+      - "27017:27017"
     env_file:
       - deploy/.env.prod
     networks:
       - datalake_network
   minio:
     image: 'bitnami/minio:latest'
+    #command: server /data --address '0.0.0.0:9000' --console-address '0.0.0.0:9001'
     container_name: minio_db
     hostname: minio_db
+    ports:
+      - "9001:9001"
+      - "9000:9000"
     env_file:
       - deploy/.env.prod
     networks:
