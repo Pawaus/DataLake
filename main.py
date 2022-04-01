@@ -1,5 +1,5 @@
 from flask import Blueprint
-from flask import flash, request, redirect, render_template
+from flask import flash, request, redirect, render_template, url_for
 from flask_login import login_required, current_user
 import back
 
@@ -17,17 +17,18 @@ def page_not_found(e):
 def index():
     user = current_user
     if not user.is_authenticated:
-        return render_template('index.html', len_minio=backend.minio.count_obj(), is_auth=False)
+        return render_template('index.html')
     else:
-        return render_template('index.html', len_minio=backend.minio.count_obj(), is_auth=True, user=current_user)
+        return render_template('index.html')
 
 
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@login_required
+
 @main.route('/upload', methods=['GET', 'POST'])
+@login_required
 def upload():
     if request.method == 'GET':
         return render_template('upload.html')
@@ -50,27 +51,57 @@ def upload():
                 res = backend.minio.upload_file(file)
                 doc = backend.pdf.pdf_to_text_stream_2(backend.minio.get_stream_file(res.object_name))
                 backend.natasha.doc_init(doc)
-            return render_template('index.html', len_minio=backend.minio.count_obj())
+            return render_template('index.html')
     return
 
 
-@main.route('/download')
+@main.route('/download', methods=['GET', 'POST'])
+@login_required
 def download():
-    return render_template('download.html')
+    if request.method == 'GET':
+        result = backend.minio.get_object()
+        return render_template('download.html', result=result)
 
 
-@main.route('/search_files')
+@main.route('/search_files', methods=['GET', 'POST'])
+@login_required
 def search_files():
-    result = backend.minio.get_object()
-    return render_template('search_files.html', result=result)
+    if request.method == 'GET':
+        result = backend.minio.get_object()
+        return render_template('search_files.html', result=result)
+    if request.method == 'POST':
+        result = backend.minio.get_object()
+        search_str = request.form.get('search_str')
+        result_search = []
+        for item in result:
+            if search_str in item:
+                result_search.append(item)
+                continue
+        return render_template('search_files.html', result=result_search)
 
 
-@main.route('/search_tags')
+@main.route('/search_tags', methods=['GET', 'POST'])
+@login_required
 def search_tags():
-    result = backend.mongo.get_all_files()
-    return render_template('search_tags.html', result=result)
+    if request.method == 'GET':
+        result = backend.mongo.get_all_files()
+        return render_template('search_tags.html', result=result)
+    if request.method == 'POST':
+        result = backend.mongo.get_all_files()
+        search_str = request.form.get('search_str')
+        result_search = []
+        for item in result:
+            if search_str in item['file']:
+                result_search.append(item)
+                continue
+            for tag in item['tags']:
+                if search_str in tag:
+                    result_search.append(item)
+                    continue
+        return render_template('search_tags.html', result=result_search)
 
 
-@main.route('/extend')
-def extend():
-    return render_template('extend.html')
+@main.route('/settings_telegram', methods=['GET', 'POST'])
+@login_required
+def settings_telegram():
+    return render_template('settings_telegram.html')
