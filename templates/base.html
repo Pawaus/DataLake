@@ -31,7 +31,7 @@
         <ul class="navbar-nav bg-gradient-secondary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index">
                 <div class="sidebar-brand-text mx-3">Pawa Datalake</div>
             </a>
 
@@ -82,6 +82,27 @@
                 </div>
             </li>
 
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Setting
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSettings"
+                    aria-expanded="true" aria-controls="collapseSettings">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Other Applications</span>
+                </a>
+                <div id="collapseSettings" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="settings_telegram">Telegram</a>
+                    </div>
+                </div>
+            </li>
+
         </ul>
         <!-- End of Sidebar -->
 
@@ -94,14 +115,14 @@
 
                     <ul class="navbar-nav ml-auto">
                         <div class="topbar-divider d-none  d-sm-block"></div>
-                        {% if not is_auth %}
+                        {% if not current_user.is_authenticated %}
                             <a class="mr-2 d-none d-lg-inline text-primary small" href="{{ url_for('auth.register') }}">Register</a>
                             <span class="mr-2 d-none d-lg-inline text-primary small"> or </span>
                             <a class="mr-2 d-none d-lg-inline text-primary small" href="{{ url_for('auth.login') }}">Login</a>
                         {% else %}
                         <li class="nav-item dropdown no-arrow show">
                             <a class="nav-link dropdown-toggle" role="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-primary small">{{ user.name }}</span>
+                                <span class="mr-2 d-none d-lg-inline text-primary small">{{ current_user.name }}</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                             <a class="dropdown-item" href="{{ url_for('auth.logout') }}">
