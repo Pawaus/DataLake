@@ -3,6 +3,13 @@
     <div class="text-center">
         <h1 class="h4 text-gray-900 mb-4">Добро пожаловать!</h1>
     </div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="text-center">
+            <h1 class="h4 text-danger-900 mb-4">{{ messages[0] }}</h1>
+        </div>
+    {% endif %}
+    {% endwith %}
     <form class="user" method="post">
         <div class="form-group">
             <input type="email" class="form-control form-control-user"
@@ -17,6 +24,6 @@
         <hr>
     </form>
     <div class="text-center">
-        <a class="small" href="register.html">Create an Account!</a>
+        <a class="small" href="{{ url_for('auth.register') }}">Create an account!</a>
     </div>
 {% endblock %}
