@@ -1,4 +1,5 @@
 import io
+import socket
 
 import boto3
 from minio import Minio
@@ -7,18 +8,25 @@ import os
 
 
 class minio_uploader():
-    def __init__(self, ip, port, user, passwd, security):
-        self.name_bucket = ""
-        self.client = Minio(ip + ":" + port, user, passwd, session_token=None, secure=security)
-        self.s3 = boto3.resource('s3', endpoint_url='http://'+ip+':'+port, aws_access_key_id='3GYPMFGY6DLUVJF8DN5R',
-                            aws_secret_access_key='UN9GVBDJg6BhdmBxrYGgjfs+KsGGC++R1aHs3IgW')
-
-
-    def set_bucket(self, bucket):
-        self.name_bucket = bucket
+    def __init__(self):
+        self.name_bucket = os.getenv('MINIO_DEFAULT_BUCKETS')
+        self.user = os.getenv('MINIO_ROOT_USER')
+        self.user_password = os.getenv('MINIO_ROOT_PASSWORD')
+        self.port = os.getenv('MINIO_PORT', 9000)
+        self.isProd = bool(os.getenv('DEVELOPMENT_FLASK', True))
+        if(self.isProd):
+            try:
+                self.ip_minio = socket.gethostbyname('minio_db')
+            except:
+                self.ip_minio = '0.0.0.0'
+        else:
+            self.ip_minio = '0.0.0.0'
+        self.client = Minio(self.ip_minio + ":" + str(self.port), self.user, self.user_password, session_token=None, secure=False)
+        self.s3 = boto3.resource('s3', endpoint_url='http://'+self.ip_minio+':'+str(self.port), aws_access_key_id=self.user,
+                            aws_secret_access_key=self.user_password)
+        #if not self.client.bucket_exists(self.name_bucket):
+            #self.client.make_bucket(self.name_bucket)
         self.bucket = self.s3.Bucket(str(self.name_bucket))
-        if not self.client.bucket_exists(self.name_bucket):
-            self.client.make_bucket(self.name_bucket)
 
     def upload_file(self, file):
         try:
@@ -46,9 +54,8 @@ class minio_uploader():
         return io.BytesIO(file_s3.get()["Body"].read())
 
     def get_object(self):
-        # TODO:return list objects
         list_obj = []
-        self.bucket = self.s3.Bucket(self.name_bucket)
+        #self.bucket = self.s3.Bucket(self.name_bucket)
         for obj in self.bucket.objects.all():
             list_obj.append(obj.key)
         return list_obj
