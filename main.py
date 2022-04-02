@@ -1,5 +1,5 @@
 from flask import Blueprint
-from flask import flash, request, redirect, render_template, url_for
+from flask import flash, request, redirect, render_template, url_for, send_file
 from flask_login import login_required, current_user
 import back
 
@@ -61,6 +61,13 @@ def download():
     if request.method == 'GET':
         result = backend.minio.get_object()
         return render_template('download.html', result=result)
+
+
+@main.route('/download_file/<filename>', methods=['GET', 'POST'])
+@login_required
+def download_file(filename):
+    file = backend.minio.get_stream_file(filename)
+    return send_file(file, as_attachment=True, attachment_filename=filename)
 
 
 @main.route('/search_files', methods=['GET', 'POST'])
