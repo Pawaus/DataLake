@@ -4,7 +4,7 @@ import logging
 
 import nest_asyncio
 
-from src import TelegramLoader, TelegramStorage, get_channels, register_client
+from . import TelegramLoader, TelegramStorage, get_channels, register_client
 
 SESSION_NAME = os.getenv('SESSION_NAME', 'tg_grabber')
 API_ID = int(os.getenv('API_ID', 11768520))
@@ -21,13 +21,6 @@ CUSTOM_CHANNELS_URLS = bool(os.getenv('CUSTOM_CHANNELS_URLS',True))
 
 async def main():
     channels = get_channels(CUSTOM_CHANNELS_URLS)
-
-    #db = TelegramStorage(host=PG_HOST,
-    #                     port=PG_PORT,
-    #                     dbname=PG_NAME,
-    #                     user=PG_USER,
-    #                     password=PG_PASS)
-    #await db.create_schema()
 
     loader = TelegramLoader(session_name=SESSION_NAME,
                             api_id=API_ID,

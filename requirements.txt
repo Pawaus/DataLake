@@ -39,5 +39,9 @@ flask_sqlalchemy
 flask_login
 python_docx
 PyPDF2
+telethon
+nest_asyncio
+requests
+bs4
 
 
