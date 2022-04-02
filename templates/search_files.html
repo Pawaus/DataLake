@@ -17,14 +17,23 @@ Search
             </div>
         </div>
     </form>
-    <div class="row">
+
             {% for item in result%}
-                <div class="card mb-4">
-                        <div class="card-header">
-                            {{ item }}
+
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-primary-800 font-weight-bold text-primary text-uppercase mb-1">
+                                    {{ item }}
+                                </div>
+
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-folder fa-2x text-gray-300"></i>
+                            </div>
                         </div>
+                    </div>
                 </div>
             {% endfor %}
-
-    </div>
 {% endblock %}
