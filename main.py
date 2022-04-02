@@ -10,7 +10,7 @@ ALLOWED_EXTENSIONS = {'txt', 'pdf', 'doc', 'docx', 'csv'}
 
 @main.errorhandler(404)
 def page_not_found(e):
-    return
+    return render_template('404.html'), 404
 
 
 @main.route('/')
