@@ -37,6 +37,16 @@ class minio_uploader():
         # TODO:upload file
         return result
 
+    def upload_custom_file(self,file_stream, name):
+        try:
+            len_bytes = file_stream.tell()
+            file_stream.seek(0)
+            result = self.client.put_object(self.name_bucket, name, file_stream, file_stream.getbuffer().nbytes)
+        except S3Error as exc:
+            print("error to upload")
+        # TODO:upload file
+        return result
+
     def count_obj(self):
         objects = self.client.list_objects(self.name_bucket)
         i = 0
