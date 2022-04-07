@@ -1,3 +1,6 @@
+import json
+from io import BytesIO
+import time
 from flask import Blueprint
 from flask import flash, request, redirect, render_template, url_for, send_file
 from flask_login import login_required, current_user
@@ -112,3 +115,18 @@ def search_tags():
 @login_required
 def settings_telegram():
     return render_template('settings_telegram.html')
+
+
+@main.route('/put_messages', methods=['POST', 'PUT', 'GET'])
+def put_message():
+    res = request.json
+    new_messages = json.loads(res)
+    i = 1
+    str_mes = ''
+    for mes in new_messages:
+        str_mes += str(i) + ' ' + mes+'\n'
+        i += 1
+    file = BytesIO(str_mes.encode('utf-8'))
+    time_now = time.strftime("%Y-%m-%d %H", time.localtime())
+    backend.minio.upload_custom_file(file, 'telegram_' + time_now + 'hour.txt')
+    return 'ok'
