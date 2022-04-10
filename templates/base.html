@@ -33,7 +33,7 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index">
-                <div class="sidebar-brand-text mx-3">Datalake</div>
+                <div class="sidebar-brand-text mx-3">Озеро данных</div>
             </a>
 
             <!-- Divider -->
@@ -41,7 +41,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Operating with DataLake
+                Работа с файлами с Озере Данных
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -50,12 +50,12 @@
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-folder"></i>
 
-                    <span>Files</span>
+                    <span>Файлы</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="upload">Upload</a>
-                        <a class="collapse-item" href="download">Download</a>
+                        <a class="collapse-item" href="upload">Загрузить в ОД</a>
+                        <a class="collapse-item" href="download">Загрузить на компьютер</a>
                     </div>
                 </div>
             </li>
@@ -65,7 +65,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Working with DataLake
+                Поиск по Озеру данных
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -73,12 +73,12 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>DataLake</span>
+                    <span>Поиск</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="search_files">Search Files</a>
-                        <a class="collapse-item" href="search_tags">Search by tags</a>
+                        <a class="collapse-item" href="search_files">Поиск по названиям файлов</a>
+                        <a class="collapse-item" href="search_tags">Поиск по тегам </a>
                     </div>
                 </div>
             </li>
@@ -87,7 +87,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Setting
+                Настройки
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -95,7 +95,7 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSettings"
                     aria-expanded="true" aria-controls="collapseSettings">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Other Applications</span>
+                    <span>Другие приложения</span>
                 </a>
                 <div id="collapseSettings" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -117,9 +117,9 @@
                     <ul class="navbar-nav ml-auto">
                         <div class="topbar-divider d-none  d-sm-block"></div>
                         {% if not current_user.is_authenticated %}
-                            <a class="mr-2 d-none d-lg-inline text-primary small" href="{{ url_for('auth.register') }}">Register</a>
+                            <a class="mr-2 d-none d-lg-inline text-primary small" href="{{ url_for('auth.register') }}">Зарегистрироваться</a>
                             <span class="mr-2 d-none d-lg-inline text-primary small"> or </span>
-                            <a class="mr-2 d-none d-lg-inline text-primary small" href="{{ url_for('auth.login') }}">Login</a>
+                            <a class="mr-2 d-none d-lg-inline text-primary small" href="{{ url_for('auth.login') }}">Войти</a>
                         {% else %}
                         <li class="nav-item dropdown no-arrow show">
                             <a class="nav-link dropdown-toggle" role="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -129,7 +129,7 @@
                             <a class="dropdown-item" href="{{ url_for('auth.logout') }}">
                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400">
                             </i>
-                                Logout
+                                Выход
                             </a>
                             </div>
                         </li>

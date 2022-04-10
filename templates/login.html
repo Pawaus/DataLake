@@ -1,7 +1,10 @@
 {% extends "base_auth.html" %}
+{% block title %}
+Вход
+{% endblock %}
 {% block content %}
     <div class="text-center">
-        <h1 class="h4 text-gray-900 mb-4">Добро пожаловать!</h1>
+        <h1 class="h4 text-gray-900 mb-4">Вход</h1>
     </div>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -18,12 +21,12 @@
         </div>
         <div class="form-group">
             <input type="password" class="form-control form-control-user"
-                   name="inputPassword" placeholder="Пароль">
+                   name="inputPassword" placeholder="Пароль...">
         </div>
         <input  class="btn btn-secondary btn-user btn-block" type="submit" value="Вход">
         <hr>
     </form>
     <div class="text-center">
-        <a class="small" href="{{ url_for('auth.register') }}">Create an account!</a>
+        <a class="small" href="{{ url_for('auth.register') }}">Зарегистрироваться</a>
     </div>
 {% endblock %}

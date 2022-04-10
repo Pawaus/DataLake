@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block title %}
-Search
+Поиск файлов
 {% endblock %}
 {% block content %}
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Search</h1>
+    <h1 class="h3 mb-0 text-gray-800">Поиск по названию файла</h1>
 </div>
     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="post" action="search_files">
         <div class="form-group">
-            <input type="text" class="form-control  bg-light border-0 small" placeholder="Search for..." name="search_str">
+            <input type="text" class="form-control  bg-light border-0 small" placeholder="Введите название..." name="search_str">
             <div class="input-group-append">
                 <button class="btn btn-primary" type="submit">
                     <i class="fas fa-search fa-sm">
