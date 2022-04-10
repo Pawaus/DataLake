@@ -49,7 +49,7 @@ def upload():
                 doc = backend.docx.load_txt(backend.minio.get_stream_file(res.object_name))
                 backend.natasha.doc_init(doc)
                 facts = backend.natasha.get_facts()
-                backend.mongo.upload_json(file.filename, facts)
+                backend.mongo.upload_json(file.filename, facts, '', 'docx')
             elif file.filename.rsplit('.', 1)[1].lower() == 'pdf':
                 res = backend.minio.upload_file(file)
                 doc = backend.pdf.pdf_to_text_stream_2(backend.minio.get_stream_file(res.object_name))
@@ -128,5 +128,10 @@ def put_message():
         i += 1
     file = BytesIO(str_mes.encode('utf-8'))
     time_now = time.strftime("%Y-%m-%d %H", time.localtime())
-    backend.minio.upload_custom_file(file, 'telegram_' + time_now + 'hour.txt')
+    name_file = 'telegram_' + time_now + 'hour.txt'
+    backend.minio.upload_custom_file(file, name_file)
+    doc = backend.docx.load_txt(backend.minio.get_stream_file(name_file))
+    backend.natasha.doc_init(doc)
+    facts = backend.natasha.get_facts()
+    backend.mongo.upload_json(name_file, facts, 'telegram', 'txt')
     return 'ok'
