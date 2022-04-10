@@ -2,6 +2,7 @@
 ### Flask project with natasha, mongoDB and minio object storaje with S3
 
 This project storage files and meta-information in different databases
+If you using Windows Docker Desktop, before clone run in command promt ```git config --global core.autocrlf false```
 
 To run this app:
 1. Build docker-compose ```sudo docker-compose build```
