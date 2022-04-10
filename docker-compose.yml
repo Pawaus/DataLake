@@ -23,15 +23,13 @@ services:
       - deploy/.env.prod
     networks:
       - datalake_network
-  flask:
-    build: .
-    image: datalake_pawa:0.0.1
-    container_name: dl
+  postgres:
+    image: 'postgres:latest'
+    container_name: pg
+    ports:
+      - "5432:5432"
     env_file:
-      - deploy/.env.prod
-    depends_on:
-      - minio
-      - mongo
+      - env.cfg
     networks:
       - datalake_network
   nginx:
@@ -44,6 +42,18 @@ services:
       - flask
     networks:
       - datalake_network
+  flask:
+    build: .
+    image: datalake_pawa:0.0.1
+    container_name: dl
+    env_file:
+      - deploy/.env.prod
+    depends_on:
+      - minio
+      - mongo
+    networks:
+      - datalake_network
+
 networks:
   datalake_network:
 
