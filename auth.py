@@ -23,7 +23,7 @@ def login():
         passwd = request.form.get('inputPassword')
         user = User.query.filter_by(email=email).first()
         if not user or not check_password_hash(user.password, passwd):
-            flash("Email and/or password is incorrect")
+            flash("Почта и/или пароль не верны")
             return redirect(url_for('auth.login'))
         login_user(user)
         return redirect(url_for('main.index'))
@@ -39,7 +39,7 @@ def register():
         login = request.form.get('inputLogin')
         user = User.query.filter_by(email=email).first()
         if user:
-            flash('Email is already exist')
+            flash('Пользователь с такой почтой уже существует')
             return redirect(url_for('auth.register'))
         new_user = User(email=email, name=login, password=generate_password_hash(passwd, method='sha256'))
         db.session.add(new_user)

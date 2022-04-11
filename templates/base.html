@@ -118,7 +118,7 @@
                         <div class="topbar-divider d-none  d-sm-block"></div>
                         {% if not current_user.is_authenticated %}
                             <a class="mr-2 d-none d-lg-inline text-primary small" href="{{ url_for('auth.register') }}">Зарегистрироваться</a>
-                            <span class="mr-2 d-none d-lg-inline text-primary small"> or </span>
+                            <span class="mr-2 d-none d-lg-inline text-primary small"> или </span>
                             <a class="mr-2 d-none d-lg-inline text-primary small" href="{{ url_for('auth.login') }}">Войти</a>
                         {% else %}
                         <li class="nav-item dropdown no-arrow show">
