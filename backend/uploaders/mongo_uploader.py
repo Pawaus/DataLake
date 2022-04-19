@@ -27,14 +27,15 @@ class mongo_uploader():
         self.db = self.client[self.db]
         self.colection = self.db[str(self.name_collection)]
 
-    def upload_json(self, filename, tags, additional_tags, extension):
+    def upload_json(self, filename, tags, additional_tags, extension, author):
         time_now = strftime("%Y-%m-%d %H:%M:%S", localtime())
         meta_mongo = {
             'file': filename,
             'tags': tags,
             'time': time_now,
             'user_tags': additional_tags,
-            'extension': extension
+            'extension': extension,
+            'author': author
         }
         return self.colection.insert_one(meta_mongo).inserted_id
 

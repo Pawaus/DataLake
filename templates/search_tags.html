@@ -26,11 +26,23 @@
                     <div class="text-primary-800 font-weight-bold text-primary text-uppercase mb-1">
                         {{ item['file'] }}
                     </div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-400">
-                    tags:
+                    <div class="h5 mb-0 font-weight-bold text-black-400">
+                    Ключевые слова выявленные автоматически:
                         {%  for tag in item['tags'] %}
                             {{ tag }}
                         {% endfor %}
+                    </div>
+                    <div class="h6 mb-0 font-weight-bold text-black-400">
+                    Автор:
+                        {{   item['author'] }}
+                    </div>
+                    <div class="h6 mb-0 font-weight-bold text-black-400">
+                    Расширение файла:
+                        {{  item['extension'] }}
+                    </div>
+                    <div class="h6 mb-0 font-weight-bold text-black-400">
+                    Ключевые слова автора:
+                        {{  item['user_tags'] }}
                     </div>
                 </div>
                 <div class="col-auto">
