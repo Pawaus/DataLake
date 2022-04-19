@@ -43,5 +43,6 @@ telethon
 nest_asyncio
 requests
 bs4
+textract
 
 

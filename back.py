@@ -1,6 +1,7 @@
 from backend.nlp import natasha_parcer
-from backend.extractors import docx_extract, pdf_extract
+from backend.extractors import docx_extract, pdf_extract, all_extractor
 from backend.uploaders import minio_uploader, mongo_uploader
+
 
 
 class back:
